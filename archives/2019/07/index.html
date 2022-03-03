@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>Archives: 2019/7 | Hexo</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-    
-    <!-- <meta name="keywords" content="">
-    <meta name="description" content=""> -->
-  
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/archives/2019/07/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="曾泽">
@@ -206,366 +202,40 @@
           </div>
           <div id="js-content" class="content-ll">
             
-
-  
-    <article id="post-构造函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/03/03/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" target="_blank">类的原型和继承</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/03/03/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" class="archive-article-date">
-        <time datetime="2022-03-03T07:36:48.006Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-03</time>
-</a>
-
   
   
     
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="一、原型"><a href="#一、原型" class="headerlink" title="一、原型"></a>一、原型</h3><h3 id="二、原型链"><a href="#二、原型链" class="headerlink" title="二、原型链"></a>二、原型链</h3><h4 id="原形链结构"><a href="#原形链结构" class="headerlink" title="原形链结构"></a>原形链结构</h4><p><img src="/img/prototype.png" alt="Image text"></p>
-<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>1、构造函数都有自己的原型对象 prototype<br>2、原型对象的一个属性：construction 指向自己的构造函数<br>3、通构造函数，可以 new（创建） 很多个实例、对象<br>4、实例对象和他的原型之间有一条链，叫做原型链<br>5、原型对象又有自己的原型对象，一直往外延伸，直到 Object 的原型为止<br>（ 构造函数都有一个原型属性 prototype，凡是对象都有一个原型，通过<strong>proto</strong>可以访问原形，访问到的原型又是对象，那么如此下去，就会构成一个对象的序列，该结构称为原型链）</p>
-<p>默认的原型链就是：<br>当前对象–&gt;构造函数.prototype–&gt;Object.prototype–null</p>
-<p>注意: 原型和实例上都有一个 constructor 构造器指向构造函数<br>Function.prototype.constructor &#x3D;&#x3D;&#x3D; new Function().constructor</p>
-<h3 id="三-构造函数继承"><a href="#三-构造函数继承" class="headerlink" title="三.构造函数继承"></a>三.构造函数继承</h3><blockquote>
-<p>Tips 类的创建（ es5）：new 一个 function， 在这个 function 的 prototype 里面增加属性和 方法。</p>
-</blockquote>
-<ul>
-<li>类的创建</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 下面来创建一个 Animal 类：</span></span><br><span class="line"><span class="comment">// 定义一个动物类</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name || <span class="string">&quot;Animal&quot;</span>;</span><br><span class="line">  <span class="comment">// 实例方法</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">sleep</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;正在睡觉！&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 原型方法</span></span><br><span class="line"><span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">eat</span> = <span class="keyword">function</span> (<span class="params">food</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot;正在吃：&quot;</span> + food);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> testDeo = <span class="keyword">new</span> <span class="title class_">Animal</span>(<span class="string">&quot;zz&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;test&quot;</span>, testDeo.<span class="property">name</span>); <span class="comment">//zz</span></span><br><span class="line"><span class="comment">//这样就生成了一个 Animal 类，实力化生成对象后，有方法和属性。</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Tips：类的继承——原型链继承 –原型链继承</p>
-</blockquote>
-<ul>
-<li>原型继承</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"><span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Animal</span>();</span><br><span class="line"><span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">name</span> = <span class="string">&quot;cat&quot;</span>;</span><br><span class="line"><span class="comment">// Test Code</span></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="title function_">eat</span>(<span class="string">&quot;fish&quot;</span>));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="title function_">sleep</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Animal</span>); <span class="comment">//true cat 的构造函数Prototype属性是否出现在Animal对象的原型链上面</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Cat</span>); <span class="comment">//true</span></span><br><span class="line"><span class="comment">// 介绍：</span></span><br><span class="line"><span class="comment">//在这里我们可以看到 new 了一个空对象, 这个空对象原型指向 Animal 并且 Cat.prototype 指向了这个空对象， 这种就是基于原型链的继承。</span></span><br><span class="line"><span class="comment">// 特点： 基于原型链， 既是父类的实例， 也是子类的实例</span></span><br><span class="line"><span class="comment">// 缺点： 无法实现多继承</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Tips：类的继承——构造继承 使用父类的构造函数来增强子类实例， 等于是复制父类的实例属性给 子类（ 没用到原型）</p>
-</blockquote>
-<ul>
-<li>构造继承</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="title class_">Animal</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>); <span class="comment">//相当于 Animal()  this.species = &#x27;动物&#x27; this指向Cat内部</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">//Cat</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name || <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Test Code</span></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="title function_">sleep</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Animal</span>); <span class="comment">// false  cat prototype 方法不在 Animal的原型链上面</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Cat</span>); <span class="comment">// true</span></span><br><span class="line"><span class="comment">//特点：可以实现多继承</span></span><br><span class="line"><span class="comment">//缺点：只能继承父类实例的属性和方法，不能继承原型上的属性和方法。</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>实例继承(闭包继承):为父类实例添加新特性，作为子类实例返回<blockquote>
-<p>Tips 缺点 1.实例是父类的实例，不是子类的实例 2.不支持多继承</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> instance = <span class="keyword">new</span> <span class="title class_">Animal</span>();</span><br><span class="line">  instance.<span class="property">name</span> = name || <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> instance;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> <span class="title class_">Cat</span>(<span class="string">&quot;大毛&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>拷贝继承:拷贝父类元素上的属性和方法 上述两个实用性不强<blockquote>
-<p>Tips 缺点： 1.效率低，内存占用高（因为需要拷贝父类的属性） 2.无法拷贝对象和数组</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Animal</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"><span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">species</span> = <span class="string">&quot;动物&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">extend</span>(<span class="params">Child, Parent</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> p = <span class="title class_">Parent</span>.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">  <span class="keyword">var</span> c = <span class="title class_">Child</span>.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> p) &#123;</span><br><span class="line">    c[i] = p[i];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">extebd</span>(<span class="title class_">Cat</span>, <span class="title class_">Animal</span>);</span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> <span class="title class_">Cat</span>(<span class="string">&quot;大毛&quot;</span>);</span><br><span class="line"><span class="title function_">alert</span>(cat1.<span class="property">species</span>);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>组合继承: 相当于构造继承和原型链继承的组合体。</li>
-</ul>
-<blockquote>
-<p>Tips 可以继承实例属性&#x2F;方法，也可以继承原型属性&#x2F;方法 缺点：调用了两次父类构造函数，生成了两份实例</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过调用父类构造，继承父 类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="title class_">Animal</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name || <span class="string">&#x27;Tom&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Animal</span>();</span><br><span class="line">  <span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Cat</span>;<span class="comment">//Cat的构造函数constructor指向自己</span></span><br><span class="line">  <span class="comment">// Test Code</span></span><br><span class="line">  <span class="keyword">var</span> cat = <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="property">name</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="title function_">sleep</span>());</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Animal</span>); <span class="comment">// true</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Cat</span>); <span class="comment">// true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>寄生组合继承<blockquote>
-<p>Tips 通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的 构造的时候，就不会初始化两次实例方法&#x2F;属性</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="title class_">Animal</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name || <span class="string">&quot;Tom&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 创建一个没有实例方法的类</span></span><br><span class="line">  <span class="keyword">var</span> <span class="title class_">Super</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;&#125;;</span><br><span class="line">  <span class="title class_">Super</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Animal</span>.<span class="property"><span class="keyword">prototype</span></span>; <span class="comment">//将实例作为子类的原型</span></span><br><span class="line">  <span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="keyword">new</span> <span class="title class_">Super</span>();</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">// Test Code</span></span><br><span class="line"><span class="keyword">var</span> cat = <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="property">name</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat.<span class="title function_">sleep</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Animal</span>); <span class="comment">// true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(cat <span class="keyword">instanceof</span> <span class="title class_">Cat</span>); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/03/03/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-promise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+        <div class="archives">
     
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/28/promise/" target="_blank">从0开始实现promise</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/28/promise/" class="archive-article-date">
-        <time datetime="2022-02-27T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h3 id="1、简易版-promise"><a href="#1、简易版-promise" class="headerlink" title="1、简易版 promise"></a>1、简易版 promise</h3><ul>
-<li>引用转载文章地址：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144058361">手写 promise</a></li>
-</ul>
-<h4 id="简易版本"><a href="#简易版本" class="headerlink" title="简易版本"></a>简易版本</h4>
-    
-    <a class="article-more-a" href="/2022/02/28/promise/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">日记本</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/28/promise/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2022/02/11/hello-world/" target="_blank">Hello World</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2022/02/11/hello-world/" class="archive-article-date">
-        <time datetime="2022-02-11T09:55:35.630Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-02-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2022/02/11/hello-world/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-git" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2019/07/01/git/" target="_blank">Git分支的创建、删除、切换</a>
-  
-    </h1>
-  
-
-
-  
-  
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
 <a href="/2019/07/01/git/" class="archive-article-date">
         <time datetime="2019-07-01T02:06:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-01</time>
 </a>
 
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2019/07/01/git/" target="_blank">Git分支的创建、删除、切换</a>
   
-    
-
+    </h1>
   
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h5 id="1、本地创建新分支并切换到新分支"><a href="#1、本地创建新分支并切换到新分支" class="headerlink" title="1、本地创建新分支并切换到新分支"></a>1、本地创建新分支并切换到新分支</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">git checkout -b 分支名</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="2、提交分支到远程仓库"><a href="#2、提交分支到远程仓库" class="headerlink" title="2、提交分支到远程仓库"></a>2、提交分支到远程仓库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">git push origin 分支名</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="3、切换分支"><a href="#3、切换分支" class="headerlink" title="3、切换分支"></a>3、切换分支</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># </span><span class="language-bash">git checkout 分支名</span></span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2019/07/01/git/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -577,41 +247,19 @@
 		</ul>
 	</div>
 
-    
+          
 
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2019/07/01/git/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -651,9 +299,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
